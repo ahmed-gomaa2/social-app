@@ -1,0 +1,151 @@
+.signup {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #E8E8E8;
+    height: 100vh;
+}
+
+.signup__container {
+    display: flex;
+    flex-direction: row;
+    height: 70%;
+    width: auto;
+    background-color: white;
+}
+
+.signup__left {
+    display: flex;
+    height: 100%;
+    width: 50%;
+}
+
+.signup__left img {
+    width: 100%;
+    margin: 0;
+    object-fit: cover;
+}
+
+.signup__right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup__right h1 {
+    color: green;
+}
+
+.signup__form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.signup__formLine {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+.signup__formLine input {
+    height: 30px;
+    border: none;
+    width: 100%;
+    outline: none;
+    background-color: lightgray;
+    padding-left: 5px;
+}
+
+.signup__formLine label {
+    margin-bottom: 10px;
+}
+
+.signup__formButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup__formSubmit {
+    width: 100px;
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    border: none;
+    height: 40px;
+    margin-right: 10px;
+    transition: all ease-in-out .2s;
+}
+
+.signup__formSubmit:hover {
+    background-color: blueviolet;
+    color: white;
+}
+
+.signup__login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup__formSignIn {
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+    color: blueviolet;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.signup__formSignIn:hover {
+    color: blue;
+}
+
+@media only screen and (max-width: 750px) {
+    .signup {
+        overflow: overlay;
+    }
+
+    .signup__container {
+        flex-direction: column;
+        height: auto;
+        width: 70%;
+    }
+
+    .signup__left {
+        width: 100%;
+    }
+
+    .signup__left img {
+        width: 100%;
+    }
+
+    .signup__right {
+        width: 100%;
+    }
+
+
+}
+
+@media only screen and (max-width: 500px) {
+    .signup__container {
+        width: 100%;
+    }
+    .signup__formLine input {
+        width: 100%;
+    }
+
+    .signup__formButtons {
+        margin-top: 10px;
+        flex-direction: column;
+    }
+}

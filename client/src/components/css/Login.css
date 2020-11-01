@@ -1,0 +1,159 @@
+.login {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #E8E8E8;
+    height: 100vh;
+    overflow: overlay;
+}
+
+.login__container {
+    display: flex;
+    flex-direction: row;
+    height: 70%;
+    width: auto;
+    background-color: white;
+    transition: all ease-in-out .2s;
+}
+
+.login__left {
+    display: flex;
+    height: 100%;
+    width: 50%;
+}
+
+.login__left img {
+    width: 100%;
+    margin: 0;
+    object-fit: cover;
+}
+
+.login__right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+}
+
+.login__right h1 {
+    color: green;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.login__formLine {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+.login__formLine input {
+    height: 30px;
+    border: none;
+    width: 100%;
+    outline: none;
+    background-color: lightgray;
+    padding-left: 5px;
+}
+
+.login__formLine label {
+    margin-bottom: 10px;
+}
+
+.login__formButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__formSubmit {
+    width: 100px;
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    border: none;
+    height: 40px;
+    margin-right: 10px;
+    transition: all ease-in-out .2s;
+}
+
+.login__formSubmit:hover {
+    background-color: blueviolet;
+    color: white;
+}
+
+.login__signup {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__formSignUp {
+    text-decoration: none;
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+    color: blueviolet;
+    margin-left: 5px;
+
+}
+
+.login__formSignUp:hover {
+    color: blue;
+}
+
+@media only screen and (max-width: 750px) {
+    .login {
+        overflow: overlay;
+    }
+
+    .login__container {
+        flex-direction: column;
+        height: auto;
+        width: 70%;
+    }
+
+    .login__left {
+        width: 100%;
+    }
+
+    .login__left img {
+        width: 100%;
+    }
+
+    .login__right {
+        width: 100%;
+    }
+
+
+}
+
+@media only screen and (max-width: 500px) {
+    .login__container {
+        width: 100%;
+    }
+    .login__formLine input {
+        width: 100%;
+    }
+
+    .login__formButtons {
+        margin-top: 10px;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-height: 420px)  {
+    .login__container{
+        height: 100vh;
+    }
+}
