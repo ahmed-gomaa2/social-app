@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './css/Signup.css';
 import signupImage from './images/signup.jpg';
-import {connect} from 'react-redux'
-import * as actions from '../actions'
+import {connect} from 'react-redux';
+import * as actions from '../actions';
 import {Link} from "react-router-dom";
+import {useHistory} from 'react-router-dom';
 
 const Signup = (props) => {
     const [username, setUsername] = React.useState('');
@@ -11,6 +12,7 @@ const Signup = (props) => {
     const [password, setPassword] = React.useState('');
     const [errors, setErrors] = React.useState({})
     const [mongooError, setMongooError] = React.useState(null)
+    const history = useHistory();
 
     const handleValidation = () => {
         let errors = {};
@@ -64,6 +66,12 @@ const Signup = (props) => {
             props.createNewUser(user)
         }
     }
+
+    useEffect(() => {
+        if(props.user?.username) {
+            history.push('/create/post')
+        }
+    }, [props.user])
 
     return (
         <div className={'signup'}>

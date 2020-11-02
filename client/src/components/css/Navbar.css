@@ -1,0 +1,152 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.navbar__right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__sidebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all ease-in-out .2s;
+}
+
+.navbar__post {
+    margin-right: 20px;
+    background-color: blue;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all ease-in-out .1s;
+}
+
+.navbar__post:hover {
+    background-color: lightblue;
+}
+
+.navbar__post:hover a {
+    color: black;
+}
+
+.navbar__post a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar__auth {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar__signup {
+    margin-right: 20px;
+    text-decoration: none;
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all ease-in-out .2s;
+}
+
+.navbar__signup:hover {
+    background-color: darkslategray;
+}
+
+.navbar__login {
+    text-decoration: none;
+    color: black;
+    transition: all ease-in-out .1s;
+}
+
+.navbar__login:hover {
+    color: blue;
+}
+
+
+.header__menu {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.header__menu div {
+    display: none;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+
+    background: blue;
+    border-radius: 3px;
+
+    z-index: 1;
+
+    transform-origin: 4px 2px;
+
+    transition: all 0.3s ease-in;
+
+}
+
+
+
+@media only screen and (max-width: 500px) {
+    .header__menu div {
+        display: block;
+    }
+
+    .navbar__sidebar {
+        position: fixed;
+        top: 60px;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: lightgreen;
+        justify-content: start;
+        right: -200px;
+        height: calc(100vh - 60px);
+    }
+
+    .navbar__auth {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar__post {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 0;
+        text-decoration: none;
+    }
+
+    .navbar__signup{
+        margin-bottom: 20px;
+        margin-right: 0;
+    }
+
+    .navbar__sidebarOut {
+        right: 0;
+    }
+}
+
+
+.active div:first-child {
+    transform: rotate(45deg);
+}
+
+.active div:nth-child(2) {
+    opacity: 0;
+}
+
+.active div:nth-child(3) {
+    transform: rotate(-45deg);
+}

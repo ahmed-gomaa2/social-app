@@ -5,6 +5,8 @@ const LocalStratgy = require('passport-local')
 const User = require('./models/User.js');
 const keys = require('./keys.js');
 const mongoose = require('mongoose');
+const File = require('./models/File.js');
+const Post = require('./models/Post.js')
 
 const app = express();
 
@@ -66,6 +68,29 @@ app.post('/api/login', (req, res) => {
 
 app.get('/api/user', (req, res) => {
     res.send(req.user)
+});
+
+app.post('/api/upload/file', File.upload.single('file'), (req, res) => {
+    res.send(req.file)
+})
+
+app.post('/api/new/post', (req, res) => {
+    const newPost = {
+        body: req.body.body,
+        author: {
+            id: req.user._id,
+            username: req.user.username
+        },
+        file: req.body.file
+    }
+
+    Post.create(newPost, (err, post) => {
+        if(err) {
+            console.log(err)
+        }else {
+            res.send(post)
+        }
+    })
 })
 
 const port = process.env.PORT || 5000;

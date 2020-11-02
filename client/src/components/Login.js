@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './css/Login.css';
 import loginImage from './images/signup.jpg';
-import {connect} from 'react-redux'
-import * as actions from '../actions'
+import {connect} from 'react-redux';
+import * as actions from '../actions';
 import {Link} from "react-router-dom";
+import {useHistory} from 'react-router-dom';
 
 const Login = (props) => {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [errors, setErrors] = React.useState({})
     const [mongooError, setMongooError] = React.useState(null)
+    const history = useHistory();
 
     const handleValidation = () => {
         let errors = {};
@@ -30,30 +32,34 @@ const Login = (props) => {
     }
 
     const handleMongoErrors = () => {
-        let valid = true;
         let message;
         if(props.user?.message) {
             message = props.user.message;
-            valid = false;
         }
         setMongooError(message)
-        return valid
     }
 
     const handleFormSubmit = e => {
         e.preventDefault();
 
-        if(handleValidation() && handleMongoErrors()) {
+        if(handleValidation()) {
             const user = {
                 username: username,
                 password: password
             }
 
             props.logUserIn(user).then(() => {
-                props.fetchingUser()
+                handleMongoErrors()
+
             })
         }
     }
+
+    useEffect(() => {
+        if(props.user?.username) {
+            history.push('/create/post')
+        }
+    }, [props.user])
 
     return (
         <div className={'login'}>
