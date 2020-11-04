@@ -9,6 +9,9 @@ export default function(state= null, action) {
         case 'FETCHING_USER':
             console.log(action.payload)
             return action.payload
+        case 'LOG_USER_OUT':
+            console.log(action.payload);
+            return action.payload
         default:
             return state
     }

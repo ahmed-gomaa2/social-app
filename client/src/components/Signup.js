@@ -69,7 +69,7 @@ const Signup = (props) => {
 
     useEffect(() => {
         if(props.user?.username) {
-            history.push('/create/post')
+            history.push('/')
         }
     }, [props.user])
 

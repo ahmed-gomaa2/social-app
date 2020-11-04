@@ -3,12 +3,14 @@ import './css/CreatePost.css';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
-import axios from 'axios'
+import axios from 'axios';
+import {useHistory} from 'react-router-dom'
 
 const CreatePost = (props) => {
     const [file, setFile] = React.useState(null);
     const [body, setBody] = React.useState('');
-    const [errors, setErrors] = React.useState({})
+    const [errors, setErrors] = React.useState({});
+    const history = useHistory();
 
     const handleFileChange = e => {
         if(e.target.files[0]) {
@@ -24,13 +26,19 @@ const CreatePost = (props) => {
             formIsValid = false;
             errors['form'] = "You forgot to add content!"
         }
+
+        if(!props.user?.username) {
+            formIsValid = false;
+            errors['form'] = "You aren't Signed In."
+            history.push('/login')
+        }
         setErrors(errors);
         return formIsValid;
     }
 
     const handleFormSubmit = e => {
         e.preventDefault();
-        if(handleValidations() && file && props.user) {
+        if(handleValidations() && file) {
             const fileForm = new FormData();
             fileForm.append('file', file, file.name);
             axios.post('/api/upload/file', fileForm, {
@@ -44,7 +52,23 @@ const CreatePost = (props) => {
                     body: body,
                     file: res.data.filename
                 }
-                axios.post('/api/new/post', post)
+                axios.post('/api/new/post', post).then((res) => {
+                    props.fetchPosts()
+                    if(res.data.body) {
+                        history.push('/')
+                    }
+                } )
+            })
+        }else if(handleValidations() && !file) {
+            const post = {
+                body: body
+            }
+
+            axios.post('/api/new/post', post).then(res => {
+                props.fetchPosts()
+                if(res.data.body) {
+                    history.push('/')
+                }
             })
         }
     }
@@ -55,7 +79,6 @@ const CreatePost = (props) => {
                     <h1>Create New Post</h1>
                     {errors.form && <p style={{color: 'red'}}>{errors.form}</p>}
                 </div>
-
                 <form onSubmit={handleFormSubmit} className="createPost__form">
                     <div className="createPost__formLine">
                         <label htmlFor="">Post Body:</label>

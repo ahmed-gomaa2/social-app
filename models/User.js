@@ -8,7 +8,19 @@ const userSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now()
-    }
+    },
+    likedPosts: [
+        {
+            postId: String,
+            _id: String
+        }
+    ],
+    dislikedPosts: [
+        {
+            postId: String,
+            _id: String
+        }
+    ]
 })
 
 

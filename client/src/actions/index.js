@@ -26,3 +26,21 @@ export const fetchingUser = () => async dispatch => {
         payload: res.data
     })
 }
+
+export const logUserOut = () => async dispatch => {
+    const res = await axios.get('/api/logout');
+
+    dispatch({
+        type: 'LOG_USER_OUT',
+        payload: res.data
+    })
+}
+
+export const fetchPosts = () => async dispatch => {
+    const res = await axios.get('/api/get/posts');
+
+    dispatch({
+        type: 'FETCH_POSTS',
+        payload: res.data
+    })
+}

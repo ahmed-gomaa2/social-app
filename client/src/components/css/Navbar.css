@@ -4,6 +4,19 @@
     justify-content: space-between;
     align-items: center;
     height: 60px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 500;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.7);
+}
+
+.navbar__left a{
+    text-decoration: none;
+    color: lightcoral;
+    font-family: "Helvetica Neue";
+    font-size: 30px;
+    margin-left: 20px;
 }
 
 .navbar__right {
@@ -94,7 +107,14 @@
 
 }
 
+.navbar__logout {
+    cursor: pointer;
+    color: blue;
+}
 
+.navbar__logout:hover {
+    color: red;
+}
 
 @media only screen and (max-width: 500px) {
     .header__menu div {

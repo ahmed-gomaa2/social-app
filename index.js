@@ -64,6 +64,11 @@ app.post('/api/login', (req, res) => {
             res.send(req.user)
         })
     })(req, res);
+});
+
+app.get('/api/logout', (req, res) => {
+    req.logout();
+    res.send(req.user)
 })
 
 app.get('/api/user', (req, res) => {
@@ -91,7 +96,71 @@ app.post('/api/new/post', (req, res) => {
             res.send(post)
         }
     })
+});
+
+app.get('/api/get/posts', (req, res) => {
+    Post.find({}, (err, posts) => {
+        if(err) {
+            console.log(err);
+        }else {
+            res.send(posts)
+        }
+    }).sort({created: -1})
 })
+
+app.get('/api/:filename', (req, res) =>{
+    File.gfs.grid.files.findOne({filename: req.params.filename}, (err, file) => {
+        if(!file || file.length === 0) {
+            res.status(404).json({
+                err: 'no files exists'
+            })
+        }
+
+        const readStream = File.gfs.grid.createReadStream(file.filename);
+        readStream.pipe(res)
+    })
+})
+
+app.post('/api/add/like', (req, res) => {
+    Post.update({"_id": req.body._id}, {"$inc": {"likes": 1}}, (err, post) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(post)
+        }
+
+    })
+})
+app.post('/api/remove/like', (req, res) => {
+    Post.update({_id: req.body._id}, {$inc: {likes: -1}}, (err, newPost) => {
+        if(err) {
+            console.log(err)
+        }else {
+            res.send(newPost)
+        }
+    })
+})
+
+app.post('/api/add/dislike', (req, res) => {
+    Post.update({_id: req.body._id}, {$inc: {dislikes: 1}}, (err, post) => {
+        if(err) {
+            console.log(err)
+        }else {
+            res.send(post)
+        }
+    })
+})
+
+app.post('/api/remove/dislike', (req, res) => {
+    Post.update({_id: req.body._id}, {$inc: {dislikes: -1}}, (err, post) => {
+        if(err) {
+            console.log(err)
+        }else {
+            res.send(post)
+        }
+    })
+})
+
 
 const port = process.env.PORT || 5000;
 

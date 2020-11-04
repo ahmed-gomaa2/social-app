@@ -1,15 +1,19 @@
 import React from 'react';
 import './css/Navbar.css'
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux';
+import * as actions from '../actions'
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [open, setOpen] = React.useState(false)
 
     const handleSidebarOut = () => setOpen(!open)
+
+    const handleLogoutUser = () => props.logUserOut()
     return (
         <div className={'navbar'}>
             <div className="navbar__left">
-                <h1>PostShare</h1>
+                <Link to={'/'}>PostShare</Link>
             </div>
             <div className="navbar__right">
                 <div className={`navbar__sidebar ${open && 'navbar__sidebarOut'}`}>
@@ -17,8 +21,12 @@ const Navbar = () => {
                         <Link to={'/create/post'}>New Post</Link>
                     </div>
                     <div className="navbar__auth">
-                        <Link to={'/signup'} className={'navbar__signup'}>Join</Link>
-                        <Link to={'/login'} className={'navbar__login'}>Login</Link>
+                        {props.user?.username ? (
+                            <div onClick={handleLogoutUser} className="navbar__logout">Logout</div>
+                        ) : ([
+                            <Link to={'/signup'} className={'navbar__signup'}>Join</Link>,
+                            <Link to={'/login'} className={'navbar__login'}>Login</Link>
+                            ])}
                     </div>
 
                 </div>
@@ -32,4 +40,10 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, actions) (Navbar);
